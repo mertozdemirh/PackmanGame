@@ -2,6 +2,7 @@ const width = 28;
 const grid = document.querySelector(".grid");
 const scoreDisplay = document.getElementById("score");
 const squares = [];
+let score = 0;
 
 //28*28=784
     // 0 - pac-dots
@@ -97,6 +98,9 @@ const squares = [];
                     pacmanCurrentIndex % width !==0)
                 {
                     pacmanCurrentIndex--;
+                    if (pacmanCurrentIndex === 364) {
+                        pacmanCurrentIndex = 391
+                    }
                 }
             break;
             case "ArrowRight":
@@ -106,12 +110,24 @@ const squares = [];
                     pacmanCurrentIndex % width <width-1)
                 {
                     pacmanCurrentIndex++;
+                    if(pacmanCurrentIndex===391){
+                        pacmanCurrentIndex=364
+                    }
                 }
             break;
             default:
                 return;
         }
         squares[pacmanCurrentIndex].classList.add('pacman')
+        pacDotEaten()
     }
 
     document.addEventListener('keyup', control)
+
+    function pacDotEaten() {
+        if (squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+            squares[pacmanCurrentIndex].classList.remove("pac-dot")
+            score++
+            scoreDisplay.textContent = score
+        }
+    }
