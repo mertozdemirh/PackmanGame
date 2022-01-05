@@ -57,7 +57,7 @@ let score = 0;
                 squares[i].classList.add('ghost-lair')
             } else if (layout[i] === 3) {
                 squares[i].classList.add('power-pellet')
-                //////BODYNIN BACKGROUNDUNU MAVİ YAPINCA POWER-PELLET CLASSININ RENGİNİ OVERRIDE EDİYOR NEDEN? SPESİFİKASYONA TERS DEGİL Mİ?//
+
             }
         }
     }
@@ -131,3 +131,40 @@ let score = 0;
             scoreDisplay.textContent = score
         }
     }
+
+    class Ghost{
+        constructor(className, startIndex, speed){
+            this.className = className
+            this.startIndex = startIndex
+            this.speed = speed
+            this.currentIndex = startIndex
+            this.isScared = false;
+            this.timerId = NaN;
+        }
+    }
+
+    const ghosts = [
+        new Ghost("blinky", 348, 250),
+        new Ghost("pinky", 376, 400),
+        new Ghost("inky", 351, 300),
+        new Ghost("clyde", 379, 500)
+    ]
+
+    ghosts.forEach(ghost=>squares[ghost.startIndex].classList.add(ghost.className))
+
+    ghosts.forEach(ghost=>moveGhost(ghost))
+
+   function moveGhost(ghost){
+        const directions = [-1, +1, -width, +width]
+        let direction = directions[Math.floor(Math.random() * directions.length)]
+
+        ghost.timerId = setInterval(function(){
+            squares[ghost.currentIndex].classList.remove(ghost.className)
+
+            ghost.currentIndex += direction
+
+            squares[ghost.currentIndex].classList.add(`${ghost.className}`)
+
+        }, ghost.speed)
+
+   }
