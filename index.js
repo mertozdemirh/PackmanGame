@@ -68,16 +68,36 @@ const squares = [];
     //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 
     function control(e){
+        squares[pacmanCurrentIndex].classList.remove("pacman");
         switch(e.key){
-            case "ArrowDown":console.log('pressed down')
+            case "ArrowDown":
+                
+                if(pacmanCurrentIndex<((width*width)-width)){
+                    pacmanCurrentIndex +=28;
+                }
             break;
-            case "ArrowUp":console.log('pressed up')
+            case "ArrowUp":
+               
+                if(pacmanCurrentIndex>(width-1)){
+                pacmanCurrentIndex -=28;
+                }
             break;
-            case "ArrowLeft":console.log('pressed left')
+            case "ArrowLeft":
+                
+                if(pacmanCurrentIndex % width !==0){
+                    pacmanCurrentIndex--;
+                }
             break;
-            case "ArrowRight":console.log('pressed right')
+            case "ArrowRight":
+                
+                if(pacmanCurrentIndex % width <width-1){
+                    pacmanCurrentIndex++;
+                }
             break;
+            default:
+                return;
         }
+        squares[pacmanCurrentIndex].classList.add('pacman')
     }
 
     document.addEventListener('keyup', control)
