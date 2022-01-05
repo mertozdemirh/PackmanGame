@@ -72,25 +72,25 @@ const squares = [];
         switch(e.key){
             case "ArrowDown":
                 
-                if(pacmanCurrentIndex<((width*width)-width)){
-                    pacmanCurrentIndex +=28;
+                if(!squares[pacmanCurrentIndex+width].classList.contains("wall") && pacmanCurrentIndex<((width*width)-width)){
+                    pacmanCurrentIndex +=width;
                 }
             break;
             case "ArrowUp":
                
-                if(pacmanCurrentIndex>(width-1)){
-                pacmanCurrentIndex -=28;
+                if(!squares[pacmanCurrentIndex-width].classList.contains("wall") && pacmanCurrentIndex>(width-1)){
+                pacmanCurrentIndex -=width;
                 }
             break;
             case "ArrowLeft":
                 
-                if(pacmanCurrentIndex % width !==0){
+                if(!squares[pacmanCurrentIndex-1].classList.contains("wall")&& pacmanCurrentIndex % width !==0){
                     pacmanCurrentIndex--;
                 }
             break;
             case "ArrowRight":
                 
-                if(pacmanCurrentIndex % width <width-1){
+                if(!squares[pacmanCurrentIndex+1].classList.contains("wall") && pacmanCurrentIndex % width <width-1){
                     pacmanCurrentIndex++;
                 }
             break;
