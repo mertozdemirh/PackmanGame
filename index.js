@@ -1,6 +1,7 @@
 const width = 28;
 const grid = document.querySelector(".grid");
 const scoreDisplay = document.getElementById("score");
+const gameOver = document.getElementById("gameOver")
 const squares = [];
 let score = 0;
 
@@ -121,6 +122,8 @@ let score = 0;
         squares[pacmanCurrentIndex].classList.add('pacman')
         pacDotEaten()
         powerPelletEaten()
+        checkForGameOver()
+        checkForWin()
     }
 
     document.addEventListener('keyup', control)
@@ -206,6 +209,31 @@ let score = 0;
                 squares[ghost.currentIndex].classList.add(ghost.className,"ghost")
             }
 
+            checkForGameOver();
+
         }, ghost.speed)
 
+   }
+
+   function checkForGameOver(){
+    if (
+        squares[pacmanCurrentIndex].classList.contains('ghost') && 
+        !squares[pacmanCurrentIndex].classList.contains('scared-ghost') 
+     ) {
+         ghosts.forEach(ghost=>clearInterval(ghost.timerId))
+
+         document.removeEventListener("keyup",control)
+
+         gameOver.innerHTML = "GAME OVER!"
+     }
+   }
+
+   function checkForWin(){
+       if(score ===300){
+           ghosts.forEach(ghost=>clearInterval(ghost.timerId))
+
+           document.removeEventListener("keyup", control)
+
+           gameOver.innerHTML = "YOU REACHED 300 POINTS AND WIN!!!"
+       }
    }
