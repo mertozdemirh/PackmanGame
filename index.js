@@ -196,6 +196,15 @@ let score = 0;
                 squares[ghost.currentIndex].classList.add("scared-ghost")
                 
             }
+            if(ghost.isScared && squares[ghost.currentIndex].classList.contains('pacman')){
+                squares[ghost.currentIndex].classList.remove("ghost",ghost.className,"scared-ghost")
+
+                ghost.currentIndex = ghost.startIndex;
+
+                score +=100;
+
+                squares[ghost.currentIndex].classList.add(ghost.className,"ghost")
+            }
 
         }, ghost.speed)
 
