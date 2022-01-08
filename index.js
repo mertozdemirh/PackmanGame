@@ -199,12 +199,13 @@ let score = 0;
                 squares[ghost.currentIndex].classList.add("scared-ghost")
                 
             }
-            if(ghost.isScared && squares[ghost.currentIndex].classList.contains('pacman')){
+            if(ghost.isScared && squares[pacmanCurrentIndex].classList.contains('ghost')){
                 squares[ghost.currentIndex].classList.remove("ghost",ghost.className,"scared-ghost")
 
                 ghost.currentIndex = ghost.startIndex;
 
                 score +=100;
+                scoreDisplay.textContent = score
 
                 squares[ghost.currentIndex].classList.add(ghost.className,"ghost")
             }
