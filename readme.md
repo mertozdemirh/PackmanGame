@@ -1,3 +1,5 @@
+![packman](./packman.png)
+
 The aim of the game is to collect 300 points.
 
 1 point is earned for each bait collected.
